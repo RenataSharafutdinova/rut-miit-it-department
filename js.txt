@@ -1,0 +1,38 @@
+import React, { useState } from 'react';
+import RequestForm from './RequestForm';
+import RequestList from './RequestList';
+
+function App() {
+  const [requests, setRequests] = useState([]);
+
+  const addRequest = (equipment, software) => {
+    setRequests([...requests, { equipment, software }]);
+  };
+
+  return (
+    <div>
+      <h1>Управление заявками на оборудование и ПО в РУТ МИИТ</h1>
+      <RequestForm addRequest={addRequest} />
+      <RequestList requests={requests} />
+    </div>
+  );
+}
+
+export default App;
+import React from 'react';
+
+function RequestList({ requests }) {
+  return (
+    <div>
+      <h2>Список заявок</h2>
+      {requests.map((request, index) => (
+        <div key={index}>
+          <p>Оборудование: {request.equipment}</p>
+          <p>ПО: {request.software}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default RequestList;
